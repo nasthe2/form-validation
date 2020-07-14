@@ -1,0 +1,41 @@
+.user-info,
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-info {
+  width: 100%;
+}
+
+.form {
+  padding-top: 30px;
+  width: 20%;
+}
+
+.form__input {
+  width: 100%;
+  height: 20px;
+  border-radius: 7px;
+  margin-bottom: 15px;
+  border: 2px solid rgb(195, 195, 195);
+}
+
+.form__input-valid {
+  border-color: green;
+}
+
+.form__input-invalid {
+  border-color: red;
+}
+
+.button {
+  display: block;
+  width: 50%;
+  height: 25px;
+  background-color: #fff;
+  border-radius: 7px;
+  border: 1px solid rgb(195, 195, 195);
+}
