@@ -7,6 +7,7 @@
 }
 
 .user-info {
+  position: relative;
   width: 100%;
 }
 
@@ -17,10 +18,16 @@
 
 .form__input {
   width: 100%;
-  height: 20px;
-  border-radius: 7px;
+  height: 30px;
   margin-bottom: 15px;
   border: 2px solid rgb(195, 195, 195);
+}
+
+.form__input:focus {
+  border: 2px solid rgba(87, 87, 87, .7);
+  border-radius: 0;
+  outline-offset: 0;
+  outline: none;
 }
 
 .form__input-valid {
@@ -34,8 +41,23 @@
 .button {
   display: block;
   width: 50%;
-  height: 25px;
+  height: 30px;
   background-color: #fff;
-  border-radius: 7px;
   border: 1px solid rgb(195, 195, 195);
+}
+
+.error {
+  position: absolute;
+  left: 65%;
+  color: rgb(195, 195, 195);
+  font: 400 16px Arial;
+}
+
+.error__name,
+.error__email,
+.error__phone {
+  display: flex;
+  align-items: center;
+  height: 33px;
+  margin-bottom: 15px;
 }
