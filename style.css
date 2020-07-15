@@ -23,7 +23,8 @@
   border: 2px solid rgb(195, 195, 195);
 }
 
-.form__input:focus {
+.form__input:focus,
+.button:focus {
   border: 2px solid rgba(87, 87, 87, .7);
   border-radius: 0;
   outline-offset: 0;
