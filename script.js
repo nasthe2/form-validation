@@ -23,7 +23,9 @@ function validation() {
     const formData = new FormData(form);
 
     Object.keys(data).forEach(key => formData.append(key, data[key]));
-    console.log(formData);    
+    console.log(formData); 
+
+    postData(formData);
   }
 };
 
@@ -33,8 +35,8 @@ function nameValidation() {
   let nameError = document.querySelector(".error__name");
   nameError.innerHTML = "";
 
-  const noNumber = userName.match(/\d/) === null;
-  const isFullName = (userName.split(" ").length === 3) && (userName.split(" ").filter(i => i.length > 1).length === 3);
+  const noNumber = (userName.match(/\d/) === null) && (userName.search(/[^a-zA-ZА-Яа-я\s]/) === (-1));
+  const isFullName = (userName.split(" ").length === 3);
   let upperCaseFixes = 0;
   let nameValidationError = "";
 
@@ -47,7 +49,7 @@ function nameValidation() {
     return userName;
   } else {
     if (!noNumber) {
-      nameValidationError += "Имя не должно содержать цифр. ";
+      nameValidationError += "Имя не должно содержать цифр и символов. ";
     } 
     if (!isFullName) {
       nameValidationError += "Введите фамилию, имя и отчество полностью. ";
@@ -117,4 +119,48 @@ function (event) {
   let phone = clipboard.getData("Text");
   event.target.value = phone.replace(/[^+0-9]/gim, "");
 }, false);
+
+async function postData(formData) {
+  console.log("Posting started...");
+  await delay(1500);
+  try {
+    const response = await fetch("https://putsreq.com/2vgD0NNYFFx0zKha4cGF", {
+    //const response = await fetch("https://postman-echo.com/post", {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      },
+      body: formData,
+      redirect: 'follow'
+    });
+    const result = response.text();
+    const resultStatus = response.status;
+
+    if (resultStatus >= 200 && resultStatus <= 300) {
+      handleSuccess();
+    } else {
+      handleFail(resultStatus);
+    }
+    console.log(result);
+  } catch (e) {
+    handleFail();
+    throw new Error(e);
+  }
+};
+
+function handleSuccess() {
+  form.style.width = "100%";
+  form.style.fontSize = "22px";
+  form.innerHTML = "Форма успешно отправлена!"
+  document.querySelector(".error").innerHTML = null;
+}
+
+function handleFail(resultStatus) {
+  if (resultStatus) {
+    document.querySelector(".error").innerHTML = `HTTP статус ${resultStatus}: что-то пошло не так. Попробуйте снова :(`;
+  } else {
+    document.querySelector(".error").innerHTML = "Что-то пошло не так. Попробуйте снова :(";
+  }
+  
+}
 
