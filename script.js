@@ -156,8 +156,10 @@ function handleSuccess() {
 }
 
 function handleFail(resultStatus) {
-  if (resultStatus) {
-    document.querySelector(".error").innerHTML = `HTTP статус ${resultStatus}: что-то пошло не так. Попробуйте снова :(`;
+  if (resultStatus === 401) {
+    document.querySelector(".error").innerHTML = `HTTP статус ${resultStatus}: ошибка авторизации :(`;
+  } else if (resultStatus === 404) {
+    document.querySelector(".error").innerHTML = `HTTP статус ${resultStatus}: документ не найден :(`;
   } else {
     document.querySelector(".error").innerHTML = "Что-то пошло не так. Попробуйте снова :(";
   }
