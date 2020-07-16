@@ -1,5 +1,9 @@
 const form = document.querySelector(".form");
 
+const delay = ms => {
+  return new Promise(r => setTimeout(() => r(), ms));
+};
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 });
@@ -21,7 +25,7 @@ function validation() {
     Object.keys(data).forEach(key => formData.append(key, data[key]));
     console.log(formData);    
   }
-}
+};
 
 function nameValidation() {
   const userName = document.getElementById("name").value.trim();
@@ -56,7 +60,7 @@ function nameValidation() {
     nameError.innerHTML = nameValidationError;
     return false;
   }
-}
+};
 
 function emailValidation() {
   const userEmail = document.getElementById("email").value.trim();
@@ -76,7 +80,7 @@ function emailValidation() {
     emailError.innerHTML = emailValidationError;
     return false;
   }  
-}
+};
 
 function phoneValidation() {
   const userPhone = document.getElementById("phone").value.trim();
@@ -96,7 +100,7 @@ function phoneValidation() {
     document.getElementById("phone").classList.add("form__input-invalid");
     return false;
   }  
-}
+};
 
 document.querySelector(".form").addEventListener("paste",
 function (event) {
