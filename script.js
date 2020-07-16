@@ -36,7 +36,7 @@ function nameValidation() {
   nameError.innerHTML = "";
 
   const noNumber = (userName.match(/\d/) === null) && (userName.search(/[^a-zA-ZА-Яа-я\s]/) === (-1));
-  const isFullName = (userName.split(" ").length === 3);
+  const isFullName = (userName.split(" ").length === 3) && (userName.split(" ").filter(item => item.length === 1).length === 0);
   let upperCaseFixes = 0;
   let nameValidationError = "";
 
